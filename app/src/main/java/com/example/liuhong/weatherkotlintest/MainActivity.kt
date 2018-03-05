@@ -9,6 +9,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        message.text = "Hello Kotlin"
+        message.text = getString(R.string.weather_welcome_string)
+
     }
 }
