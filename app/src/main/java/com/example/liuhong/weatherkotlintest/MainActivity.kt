@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import com.example.liuhong.weatherkotlintest.net.RequestForecastCommand
 import org.jetbrains.anko.async
@@ -25,6 +27,9 @@ class MainActivity : AppCompatActivity() {
                 forecastList.adapter = ForecastListAdapter(result)
             }
         }
+
+        val container: ViewGroup = find(R.id.container)
+        val view = container[0]
     }
 
     private fun ankoToast() {
@@ -42,4 +47,6 @@ class MainActivity : AppCompatActivity() {
                       length: Int = Toast.LENGTH_LONG) {
         Toast.makeText(this, message, length).show()
     }
+
+    operator fun ViewGroup.get(position: Int): View = getChildAt(position)
 }
