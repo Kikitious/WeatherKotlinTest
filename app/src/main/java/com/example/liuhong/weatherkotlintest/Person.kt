@@ -20,6 +20,12 @@ class Person(name: String, surname: String) : Animal(name) {
             field = 5 + value
         }
 
+    var name: String = ""
+        get() = field.toUpperCase()
+        set(value) {
+            field = "Name:${value}"
+        }
+
     init {
         //构造函数的函数体
     }
