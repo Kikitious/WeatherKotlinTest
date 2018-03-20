@@ -9,7 +9,7 @@ import com.example.liuhong.weatherkotlintest.domain.model.ForecastList
  * Created by liuhong on 2018/3/5.
  * Description: 天气预报ListAdapter
  */
-class ForecastListAdapter(val weekForecast: ForecastList) :
+class ForecastListAdapter(private val weekForecast: ForecastList) :
         RecyclerView.Adapter<ForecastListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
@@ -17,14 +17,12 @@ class ForecastListAdapter(val weekForecast: ForecastList) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        with(weekForecast.dailyForecast[position]) {
+        with(weekForecast[position]) {
             holder!!.textView.text = "${this.date} - ${this.description} - ${this.high}/${this.low}"
         }
     }
 
-    override fun getItemCount(): Int {
-        return weekForecast.dailyForecast.size
-    }
+    override fun getItemCount(): Int = weekForecast.size()
 
 
     class ViewHolder(val textView: TextView) : RecyclerView.ViewHolder(textView)
