@@ -3,12 +3,13 @@ package com.example.liuhong.weatherkotlintest
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import android.widget.TextView
+import com.example.liuhong.weatherkotlintest.domain.model.ForecastList
 
 /***
  * Created by liuhong on 2018/3/5.
  * Description: 天气预报ListAdapter
  */
-class ForecastListAdapter(val items: List<String>) :
+class ForecastListAdapter(val weekForecast: ForecastList) :
         RecyclerView.Adapter<ForecastListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
@@ -16,11 +17,13 @@ class ForecastListAdapter(val items: List<String>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        holder!!.textView.text = items.get(position)
+        with(weekForecast.dailyForecast[position]) {
+            holder!!.textView.text = "${this.date} - ${this.description} - ${this.high}/${this.low}"
+        }
     }
 
     override fun getItemCount(): Int {
-        return items.size
+        return weekForecast.dailyForecast.size
     }
 
 

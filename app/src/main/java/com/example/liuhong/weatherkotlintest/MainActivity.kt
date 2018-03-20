@@ -1,34 +1,45 @@
 package com.example.liuhong.weatherkotlintest
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.widget.Toast
+import com.example.liuhong.weatherkotlintest.net.RequestForecastCommand
+import org.jetbrains.anko.async
+import org.jetbrains.anko.find
+import org.jetbrains.anko.longToast
+import org.jetbrains.anko.uiThread
 
 class MainActivity : AppCompatActivity() {
-
-    private val items = listOf<String>(
-            "Mon 6/23 - Sunny - 31/17",
-            "Tue 6/24 - Sunny - 31/18",
-            "Wed 6/25 - Sunny - 31/19",
-            "Thurs 6/26 - Sunny - 29/17",
-            "Fri 6/27 - Sunny - 31/27",
-            "Sat 6/28 - Sunny - 31/18",
-            "Sun 6/29 - Sunny - 31/14"
-    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val forecastList = findViewById<RecyclerView>(R.id.forecast_list)
+        val forecastList = find<RecyclerView>(R.id.forecast_list)
         forecastList.layoutManager = LinearLayoutManager(this)
-        forecastList.adapter = ForecastListAdapter(items)
+        async {
+            val result = RequestForecastCommand("").execute()
+            uiThread {
+                forecastList.adapter = ForecastListAdapter(result)
+            }
+        }
+    }
+
+    private fun ankoToast() {
+        toast("Hello")
+        longToast(R.string.app_name)
     }
 
     fun niceToast(message: String,
                   tag: String = MainActivity::class.java.simpleName,
                   length: Int = Toast.LENGTH_SHORT) {
         Toast.makeText(this, "[$localClassName] $message", length).show()
+    }
+
+    fun Context.toast(message: String,
+                      length: Int = Toast.LENGTH_LONG) {
+        Toast.makeText(this, message, length).show()
     }
 }
