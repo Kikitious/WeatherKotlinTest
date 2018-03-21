@@ -2,6 +2,7 @@ package com.example.liuhong.weatherkotlintest
 
 import android.annotation.TargetApi
 import android.content.Context
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -35,6 +36,10 @@ class MainActivity : AppCompatActivity() {
 
         val container: ViewGroup = find(R.id.container)
         val view = container[0]
+
+        supportsLollipop {
+            window.statusBarColor = Color.BLACK
+        }
     }
 
     private fun ankoToast() {
@@ -54,4 +59,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     operator fun ViewGroup.get(position: Int): View = getChildAt(position)
+
+    inline fun supportsLollipop(code: () -> Unit) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            code()
+        }
+    }
 }
