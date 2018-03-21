@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.example.liuhong.weatherkotlintest.domain.model.Forecast
 import com.example.liuhong.weatherkotlintest.net.RequestForecastCommand
 import org.jetbrains.anko.async
 import org.jetbrains.anko.find
@@ -24,7 +25,12 @@ class MainActivity : AppCompatActivity() {
         async {
             val result = RequestForecastCommand("").execute()
             uiThread {
-                forecastList.adapter = ForecastListAdapter(result)
+                forecastList.adapter = ForecastListAdapter(result,
+                        object : ForecastListAdapter.OnItemClickListener {
+                            override fun invoke(forecast: Forecast) {
+                                toast(forecast.date)
+                            }
+                        })
             }
         }
 
