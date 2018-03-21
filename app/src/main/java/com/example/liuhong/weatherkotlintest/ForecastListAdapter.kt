@@ -16,7 +16,7 @@ import org.jetbrains.anko.find
  * Description: 天气预报ListAdapter
  */
 class ForecastListAdapter(private val weekForecast: ForecastList,
-                          private val itemClick: ForecastListAdapter.OnItemClickListener) :
+                          private val itemClick: (Forecast) -> Unit) :
         RecyclerView.Adapter<ForecastListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
@@ -31,7 +31,7 @@ class ForecastListAdapter(private val weekForecast: ForecastList,
 
     override fun getItemCount(): Int = weekForecast.size()
 
-    class ViewHolder(view: View, private val listener: OnItemClickListener) :
+    class ViewHolder(view: View, private val listener: (Forecast) -> Unit) :
             RecyclerView.ViewHolder(view) {
 
         private val iconView: ImageView = view.find(R.id.icon)
@@ -53,10 +53,6 @@ class ForecastListAdapter(private val weekForecast: ForecastList,
                 }
             }
         }
-    }
-
-    interface OnItemClickListener {
-        operator fun invoke(forecast: Forecast)
     }
 
 }
