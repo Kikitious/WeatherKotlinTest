@@ -9,9 +9,9 @@ data class ForecastList(
         val country: String,
         val dailyForecast: List<Forecast>) {
 
-    operator fun get(position: Int): Forecast = dailyForecast[position]
-
-    fun size(): Int = dailyForecast.size
+    operator fun get(position: Int) = dailyForecast[position]
+    //自动推断类型，可以省略返回值
+    fun size() = dailyForecast.size
 }
 
 data class Forecast(
