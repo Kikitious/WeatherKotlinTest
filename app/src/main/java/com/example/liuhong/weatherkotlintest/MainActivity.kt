@@ -12,7 +12,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.example.liuhong.weatherkotlintest.net.RequestForecastCommand
 import kotlinx.android.synthetic.main.activity_main.*
-import org.jetbrains.anko.async
+import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.find
 import org.jetbrains.anko.longToast
 import org.jetbrains.anko.uiThread
@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         forecastList.layoutManager = LinearLayoutManager(this)
-        async {
+        doAsync {
             val result = RequestForecastCommand("").execute()
             uiThread {
                 forecastList.adapter = ForecastListAdapter(result, { forecast -> toast(forecast.date) })
