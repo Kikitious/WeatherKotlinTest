@@ -68,7 +68,8 @@ object OperatorExt {
     fun dropExt(): Unit {
         val drop = list.drop(4)//5 6
 
-        val dropWhile = list.dropWhile {// 3456
+        val dropWhile = list.dropWhile {
+            // 3456
             it < 3
         }
 
@@ -94,8 +95,40 @@ object OperatorExt {
 
         val takeLast = list.takeLast(2)//5 6
 
-        val takeWhile = list.takeWhile {//1 2
+        val takeWhile = list.takeWhile {
+            //1 2
             it < 3
+        }
+
+    }
+
+    fun mapExt() {
+        list.flatMap {
+            listOf(it, it + 1, it + 2)
+        }
+
+        list.flatMap {
+            arrayListOf(it)
+        }
+
+        list.groupBy {
+            if (it % 2 == 0) {
+                "even"
+            } else {
+                "odd"
+            }
+        }
+
+        list.map {
+            it * 2
+        }
+
+        list.mapIndexed { index, i ->
+            index * i
+        }
+
+        list.mapNotNull {
+            it * 2
         }
 
     }
