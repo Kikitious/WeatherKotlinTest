@@ -171,6 +171,24 @@ object OperatorExt {
         val singleOrNull1 = list.singleOrNull { it % 5 == 0 }//5
     }
 
+    val listRepeated = listOf(2, 2, 3, 4, 5, 5, 6)
+
+    fun produce() {
+        val union = list.union(listRepeated)//LinkedHashSet<Integer> 1, 2, 3, 4, 5, 6
+
+        val zip = list.zip(listRepeated)//ArrayList<Pair> (1,2) (2,2) (3,3) (4,4) (5,5) (6,5)
+
+        val zip1 = list.zip(listRepeated, { a, b ->
+            a + b
+        })//ArrayList<Integer> 3, 4, 6, 8, 10, 11
+
+        val unzip = listOf(Pair(5, 7), Pair(1, 2)).unzip()//Pair  ([5, 1], [7, 2])
+
+        val plus = list.plus(listOf(7, 8))//ArrayList 1 2 3 4 5 6 7 8
+
+        val partition = list.partition { it % 2 == 0 }//Pair ([2, 4, 6], [1, 3, 5])
+    }
+
     fun logi(tag: String = "MainActivity", result: String) {
         Log.i(tag, result)
     }
