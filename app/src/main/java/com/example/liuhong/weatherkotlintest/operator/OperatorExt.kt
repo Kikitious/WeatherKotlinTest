@@ -189,6 +189,18 @@ object OperatorExt {
         val partition = list.partition { it % 2 == 0 }//Pair ([2, 4, 6], [1, 3, 5])
     }
 
+    val unSortedList = listOf(9, 4, 5, 7)
+
+    fun orderExt() {
+        val reversed = unSortedList.reversed()//ArrayList<Integer> 7 5 4 9
+        val asReversed = unSortedList.asReversed()//ReversedListReadOnly<Integer> 7 5 4 9
+
+        val sorted = unSortedList.sorted()//4 5 7 9
+        val sortedBy = unSortedList.sortedBy { it % 3 }//9 4 7 5
+        val sortedDescending = unSortedList.sortedDescending()// 9 7 5 4
+        val sortedByDescending = unSortedList.sortedByDescending { it % 3 }// 5 4 7 9
+    }
+
     fun logi(tag: String = "MainActivity", result: String) {
         Log.i(tag, result)
     }
