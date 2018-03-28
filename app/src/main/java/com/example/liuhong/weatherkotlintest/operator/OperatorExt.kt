@@ -103,34 +103,72 @@ object OperatorExt {
     }
 
     fun mapExt() {
-        list.flatMap {
+        val flatMap = list.flatMap {
             listOf(it, it + 1, it + 2)
-        }
+        }//ArrayList {1, 2, 3, 2, 3, 4, 3, 4, 5, 4, 5, 6, 5, 6, 7, 6, 7,8}
 
-        list.flatMap {
+        val flatMap1 = list.flatMap {
             arrayListOf(it)
-        }
+        }//ArrayList {1, 2, 3, 4, 5, 6}
 
-        list.groupBy {
+        val groupBy = list.groupBy {
             if (it % 2 == 0) {
                 "even"
             } else {
                 "odd"
             }
-        }
+        } //LinkedHashMap   mapof("odd" to listof(1, 3, 5), "even" to listof(2, 4, 6))
 
-        list.map {
+        val map = list.map {
             it * 2
-        }
+        }//ArrayList {2, 4, 6, 8, 10, 12}
 
-        list.mapIndexed { index, i ->
+        val mapIndexed = list.mapIndexed { index, i ->
             index * i
-        }
+        }//ArrayList {0, 2, 6, 12, 20, 30}
 
-        list.mapNotNull {
+        val mapNotNull = list.mapNotNull {
             it * 2
         }
 
+    }
+
+    fun elementExt() {
+        val contains = list.contains(2)//true
+
+        val elementAt = list.elementAt(4)//5
+
+        val elementAtOrElse = list.elementAtOrElse(6) { it * 2 }//12
+
+        val elementAtOrNull = list.elementAtOrNull(6)//null
+
+        val first = list.first()//1
+
+        val first1 = list.first { it % 2 == 0 }//2
+
+        val firstOrNull = list.firstOrNull { it % 7 == 0 }// null
+
+        val indexOf = list.indexOf(4)//3
+
+        val i = list[4]//5
+
+        val indexOfFirst = list.indexOfFirst { it % 2 == 0 }//1
+
+        val indexOfLast = list.indexOfLast { it % 2 == 0 }//5
+
+        val last = list.last()//6
+
+        val last1 = list.last { it % 2 == 0 }//6
+
+        val lastIndexOf = list.lastIndexOf(5)//4
+
+        val lastOrNull = list.lastOrNull { it % 7 == 0 }//null
+
+        val single = list.single { it % 5 == 0 }//5
+        //val single1 = list.single { it % 2 == 0 }//抛出异常
+
+        val singleOrNull = list.singleOrNull { it % 2 == 0 }//null
+        val singleOrNull1 = list.singleOrNull { it % 5 == 0 }//5
     }
 
     fun logi(tag: String = "MainActivity", result: String) {
