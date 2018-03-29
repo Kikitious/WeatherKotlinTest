@@ -9,12 +9,12 @@ import com.example.liuhong.weatherkotlintest.domain.model.Forecast as ModelForec
 
 /***
  * Created by du on 2018/3/20.
- * Description:
+ * Description: 网络请求返回的复杂数据ForecastResult->自己创建的ForecastList
  */
 class ForecastDataMapper {
 
     fun convertFromDataModel(forecast: ForecastResult): ForecastList {
-        return ForecastList(forecast.city.name, forecast.city.country,
+        return ForecastList(forecast.city.id, forecast.city.name, forecast.city.country,
                 convertForecastListToDomain(forecast.list))
     }
 
@@ -30,7 +30,8 @@ class ForecastDataMapper {
 
     private fun convertForecastItemToDomain(forecast: Forecast): ModelForecast {
         return ModelForecast(
-                convertDate(forecast.dt),
+                //convertDate(forecast.dt),
+                forecast.dt,
                 forecast.weather[0].description,
                 forecast.temp.max.toInt(),
                 forecast.temp.min.toInt(),

@@ -2,9 +2,10 @@ package com.example.liuhong.weatherkotlintest.domain.model
 
 /***
  * Created by du on 2018/3/20.
- * Description:
+ * Description: 城市model及城市的每日天气model
  */
 data class ForecastList(
+        val id: Long,
         val city: String,
         val country: String,
         val dailyForecast: List<Forecast>) {
@@ -15,7 +16,7 @@ data class ForecastList(
 }
 
 data class Forecast(
-        val date: String,
+        val date: Long,
         val description: String,
         val high: Int,
         val low: Int,

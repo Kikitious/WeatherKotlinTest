@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         doAsync {
             val result = RequestForecastCommand("").execute()
             uiThread {
-                forecastList.adapter = ForecastListAdapter(result, { forecast -> toast(forecast.date) })
+                forecastList.adapter = ForecastListAdapter(result, { forecast -> toast(forecast.date.toString()) })
 //                forecastList.adapter = ForecastListAdapter(result, { toast(it.date) })
 //                forecastList.adapter = ForecastListAdapter(result) { toast(it.date) }
             }
