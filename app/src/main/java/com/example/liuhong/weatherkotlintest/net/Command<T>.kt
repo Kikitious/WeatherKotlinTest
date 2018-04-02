@@ -1,4 +1,4 @@
-package com.example.liuhong.weatherkotlintest.domain
+package com.example.liuhong.weatherkotlintest.net
 
 /***
  * Created by du on 2018/3/20.

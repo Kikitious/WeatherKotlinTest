@@ -11,7 +11,7 @@ import com.example.liuhong.weatherkotlintest.domain.model.Forecast as ModelForec
  * Created by du on 2018/3/20.
  * Description: 网络请求返回的复杂数据ForecastResult->自己创建的ForecastList
  */
-class ForecastDataMapper {
+open class ForecastDataMapper {
 
     fun convertFromDataModel(forecast: ForecastResult): ForecastList {
         return ForecastList(forecast.city.id, forecast.city.name, forecast.city.country,

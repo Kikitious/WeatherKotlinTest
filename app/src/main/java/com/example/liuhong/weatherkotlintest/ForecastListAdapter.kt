@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.item_forecast.view.*
  * Description: 天气预报ListAdapter
  */
 class ForecastListAdapter(private val weekForecast: ForecastList,
-                          private val itemClick: (Forecast) -> Unit) :
+                          private val itemClick: (ForecastList) -> Unit) :
         RecyclerView.Adapter<ForecastListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
@@ -29,20 +29,23 @@ class ForecastListAdapter(private val weekForecast: ForecastList,
 
     override fun getItemCount(): Int = weekForecast.size()
 
-    class ViewHolder(view: View, private val listener: (Forecast) -> Unit) :
+    inner class ViewHolder(view: View, private val listener: (ForecastList) -> Unit) :
             RecyclerView.ViewHolder(view) {
+
+        init {
+            itemView.setOnClickListener {
+                listener(weekForecast)
+                //listener.invoke(forecast)
+            }
+        }
 
         fun bindForecast(forecast: Forecast) {
             with(forecast) {
                 Picasso.with(itemView.context).load(iconUrl).into(itemView.icon)
                 itemView.date.text = date.toString()
                 itemView.description.text = description
-                itemView.maxTemperature.text = "${high.toString()}"
-                itemView.minTemperature.text = "${low.toString()}"
-                itemView.setOnClickListener {
-                    listener(forecast)
-                    //listener.invoke(forecast)
-                }
+                itemView.maxTemperature.text = high.toString()
+                itemView.minTemperature.text = low.toString()
             }
         }
     }

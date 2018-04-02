@@ -12,10 +12,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.example.liuhong.weatherkotlintest.net.RequestForecastCommand
 import kotlinx.android.synthetic.main.activity_main.*
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.find
-import org.jetbrains.anko.longToast
-import org.jetbrains.anko.uiThread
+import org.jetbrains.anko.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,11 +22,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         forecastList.layoutManager = LinearLayoutManager(this)
         doAsync {
-            val result = RequestForecastCommand("").execute()
+            val result = RequestForecastCommand("1022").execute()
+//            val result = ForecastProvider().requestByZipCode("1022",7 )
             uiThread {
-                forecastList.adapter = ForecastListAdapter(result, { forecast -> toast(forecast.date.toString()) })
-//                forecastList.adapter = ForecastListAdapter(result, { toast(it.date) })
-//                forecastList.adapter = ForecastListAdapter(result) { toast(it.date) }
+                forecastList.adapter = ForecastListAdapter(result) { list ->
+                    startActivity<DetailActivity>(DetailActivity.ID to list.id,
+                            DetailActivity.CITY_NAME to list.city)
+                }
             }
         }
 
